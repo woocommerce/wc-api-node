@@ -1,5 +1,4 @@
 {
-  "es5": true,
   "boss": true,
   "curly": true,
   "eqeqeq": true,
@@ -13,5 +12,13 @@
   "undef": true,
   "unused": true,
   "node": true,
-  "browser": false
+  "browser": false,
+  "predef": [
+    "describe",
+    "it",
+    "before",
+    "beforeEach",
+    "after",
+    "afterEach"
+  ]
 }
