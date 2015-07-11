@@ -21,7 +21,7 @@ Check out the WooCommerce API endpoints and data that can be manipulated in <htt
 ## Setup
 
 ```js
-var WooCommerceAPI = require('WooCommerceAPI');
+var WooCommerceAPI = require('woocommerce-api');
 
 var WooCommerce = new WooCommerceAPI({
   url: 'http://example.com',

@@ -1,6 +1,6 @@
 'use strict';
 
-var WooCommerceAPI = require('./index.js'); // use require('WooCommerceAPI')
+var WooCommerceAPI = require('./index.js'); // use require('woocommerce-api')
 
 // Initialize the WooCommerceAPI class
 var WooCommerce = new WooCommerceAPI({
