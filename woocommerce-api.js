@@ -65,13 +65,19 @@ WooCommerceAPI.prototype._getUrl = function(endpoint) {
  * @return {Object}
  */
 WooCommerceAPI.prototype._getOAuth = function() {
-  return new OAuth({
+  var data = {
     consumer: {
       public: this.consumerKey,
       secret: this.consumerSecret
     },
     signature_method: 'HMAC-SHA256'
-  });
+  };
+
+  if ('v3' !== this.version) {
+    data.last_ampersand = false;
+  }
+
+  return new OAuth(data);
 };
 
 /**
