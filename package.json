@@ -6,7 +6,7 @@
     "lint": "jshint .",
     "checkStyle": "jscs .",
     "pretest": "npm run-script lint && npm run-script checkStyle",
-    "test": "istanbul cover ./node_modules/.bin/_mocha test",
+    "test": "istanbul cover ./node_modules/.bin/_mocha test.js",
     "posttest": "istanbul check-coverage --statements 85 --branches 70 --functions 100 --lines 90 && rm -rf coverage"
   },
   "publishConfig": {
@@ -24,10 +24,12 @@
     "request": "^2.58.0"
   },
   "devDependencies": {
+    "chai": "^3.0.0",
     "istanbul": "^0.3.8",
     "jscs": "^1.6.1",
     "jshint": "^2.5.6",
-    "mocha": "^2.2.1"
+    "mocha": "^2.2.1",
+    "nock": "^2.7.0"
   },
   "repository": {
     "type": "git",
