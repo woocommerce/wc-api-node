@@ -71,5 +71,6 @@ var WooCommerce = new WooCommerceAPI({
 
 ## Release History
 
+- 2015-07-11 - v1.0.2 - Fixed the examples on example.js and README.md.
 - 2015-07-11 - v1.0.1 - Added unit tests, improved the main class and added full description on README.md.
 - 2015-07-11 - v1.0.0 - Initial release.
