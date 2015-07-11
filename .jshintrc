@@ -1,40 +1,17 @@
-{ "asi": true
-, "boss": true
-, "browser": true
-, "curly": false
-, "devel": false
-, "devel": true
-, "eqeqeq": true
-, "eqnull": true
-, "es5": false
-, "evil": false
-, "immed": false
-, "indent": 2
-, "jquery": true
-, "latedef": false
-, "laxbreak": true
-, "laxcomma": true
-, "maxcomplexity": 6
-, "maxdepth": 4
-, "maxstatements": 25
-, "maxlen": 120
-, "newcap": true
-, "node": true
-, "noempty": false
-, "nonew": true
-, "quotmark": "single"
-, "nonew": true
-, "predef":
-  [ "describe"
-  , "it"
-  , "before"
-  , "beforeEach"
-  , "after"
-  , "afterEach"
-  ]
-, "smarttabs": true
-, "strict": false
-, "trailing": false
-, "undef": true
-, "unused": true
+{
+  "es5": true,
+  "boss": true,
+  "curly": true,
+  "eqeqeq": true,
+  "eqnull": true,
+  "expr": true,
+  "immed": true,
+  "noarg": true,
+  "onevar": true,
+  "quotmark": "single",
+  "trailing": true,
+  "undef": true,
+  "unused": true,
+  "node": true,
+  "browser": false
 }
