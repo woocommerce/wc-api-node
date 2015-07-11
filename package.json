@@ -1,9 +1,10 @@
 {
-  "name": "woocommerce-api",
+  "name": "woocommerce-api-node",
   "description": "A Node.js wrapper for the WooCommerce REST API",
   "version": "1.0.0",
   "dependencies": {
-    "oauth-1.0a": "^0.2.1"
+    "oauth-1.0a": "^0.2.1",
+    "request": "^2.58.0"
   },
   "scripts": {
     "lint": "jshint .",
@@ -21,6 +22,7 @@
     "rest-api"
   ],
   "license": "MIT",
+  "main": "lib/woocommerce-api.js",
   "devDependencies": {
     "istanbul": "^0.3.8",
     "jscs": "^1.6.1",

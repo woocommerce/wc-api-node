@@ -1,7 +1,6 @@
 { "asi": true
 , "boss": true
 , "browser": true
-, "camelcase": true
 , "curly": false
 , "devel": false
 , "devel": true
