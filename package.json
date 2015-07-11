@@ -18,7 +18,7 @@
     "rest-api"
   ],
   "license": "MIT",
-  "main": "woocommerce-api.js",
+  "main": "index.js",
   "dependencies": {
     "oauth-1.0a": "^0.2.1",
     "request": "^2.58.0"

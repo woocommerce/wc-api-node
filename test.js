@@ -1,4 +1,4 @@
-var WooCommerce = require('./woocommerce-api.js');
+var WooCommerce = require('./index.js');
 var chai = require('chai');
 var nock = require('nock');
 

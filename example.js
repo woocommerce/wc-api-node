@@ -1,9 +1,9 @@
 'use strict';
 
-var API = require('./woocommerce-api.js'); // use require('WooCommerceAPI')
+var WooCommerceAPI = require('./index.js'); // use require('WooCommerceAPI')
 
 // Initialize the WooCommerceAPI class
-var WooCommerce = new API({
+var WooCommerce = new WooCommerceAPI({
   url: 'http://example.com', // Your store url (required)
   // version: 'v3', // WooCommerce API version (optional)
   // verifySsl: true, // Use `false` when need test with self-signed certificates, default is `true` (optional)
