@@ -1,4 +1,4 @@
-# WooCommerce API
+# WooCommerce API - Node.js Client
 
 A Node.js wrapper for the WooCommerce REST API
 
@@ -10,6 +10,12 @@ A Node.js wrapper for the WooCommerce REST API
 ```
 npm install --save woocommerce-api
 ```
+
+## TODO
+
+- [ ] README - Usage section
+- [ ] README - Changelog section
+- [ ] tests
 
 ## Usage
 

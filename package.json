@@ -1,5 +1,5 @@
 {
-  "name": "woocommerce-api-node",
+  "name": "woocommerce-api",
   "description": "A Node.js wrapper for the WooCommerce REST API",
   "version": "1.0.0",
   "scripts": {
