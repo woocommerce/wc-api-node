@@ -1,12 +1,12 @@
 var WooCommerce = require('./woocommerce-api.js');
-var should = require('chai').should();
+var chai = require('chai');
 var nock = require('nock');
 
 describe('#Construct', function() {
   it('should throw an error if the url, consumerKey or consumerSecret are missing', function() {
-    should.Throw(function() {
+    chai.expect(function() {
       new WooCommerce();
-    }, Error);
+    }).to.throw(Error);
   });
 
   it('should set the default options', function() {
@@ -16,10 +16,10 @@ describe('#Construct', function() {
       consumerSecret: 'foo'
     });
 
-    api.version.should.equal('v3');
-    api.isSsl.should.be.false;
-    api.verifySsl.should.be.true;
-    api.encoding.should.equal('utf8');
+    chai.expect(api.version).to.equal('v3');
+    chai.expect(api.isSsl).to.be.false;
+    chai.expect(api.verifySsl).to.be.true;
+    chai.expect(api.encoding).to.equal('utf8');
   });
 });
 
@@ -40,8 +40,8 @@ describe('#Requests', function() {
     });
 
     api.post('orders', {}, function(err, data) {
-      should.not.exist(err);
-      data.should.be.a.string;
+      chai.expect(err).to.not.exist;
+      chai.expect(data).be.a.string;
       done();
     });
   });
@@ -52,8 +52,8 @@ describe('#Requests', function() {
     });
 
     api.get('orders', function(err, data) {
-      should.not.exist(err);
-      data.should.be.a.string;
+      chai.expect(err).to.not.exist;
+      chai.expect(data).be.a.string;
       done();
     });
   });
@@ -64,8 +64,8 @@ describe('#Requests', function() {
     });
 
     api.put('orders', {}, function(err, data) {
-      should.not.exist(err);
-      data.should.be.a.string;
+      chai.expect(err).to.not.exist;
+      chai.expect(data).be.a.string;
       done();
     });
   });
@@ -76,8 +76,20 @@ describe('#Requests', function() {
     });
 
     api.delete('orders', function(err, data) {
-      should.not.exist(err);
-      data.should.be.a.string;
+      chai.expect(err).to.not.exist;
+      chai.expect(data).be.a.string;
+      done();
+    });
+  });
+
+  it('should no return content when not using ssl', function(done) {
+    nock('http://test.dev/wc-api/v3').get('/orders').reply(200, {
+      ok: true
+    });
+
+    api.get('orders', function(err, data) {
+      chai.expect(err).to.exist;
+      chai.expect(data).to.not.exist;
       done();
     });
   });
@@ -94,8 +106,8 @@ describe('#Requests', function() {
     });
 
     oAuth.get('orders', function(err, data) {
-      should.not.exist(err);
-      data.should.be.a.string;
+      chai.expect(err).to.not.exist;
+      chai.expect(data).be.a.string;
       done();
     });
   });

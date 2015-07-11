@@ -15,6 +15,8 @@ function WooCommerceAPI(opt) {
     return new WooCommerceAPI(opt);
   }
 
+  opt = opt || {};
+
   if (!(opt.url)) {
     throw new Error('url is required');
   }
@@ -28,7 +30,7 @@ function WooCommerceAPI(opt) {
   }
 
   this.classVersion = '1.0.0';
-  this.setDefaultsOptions(opt);
+  this._setDefaultsOptions(opt);
 }
 
 /**
@@ -36,7 +38,7 @@ function WooCommerceAPI(opt) {
  *
  * @param {Object} opt
  */
-WooCommerceAPI.prototype.setDefaultsOptions = function(opt) {
+WooCommerceAPI.prototype._setDefaultsOptions = function(opt) {
   this.url            = opt.url;
   this.version        = opt.version || 'v3';
   this.isSsl          = /^https/i.test(this.url);
