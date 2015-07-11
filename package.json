@@ -1,0 +1,28 @@
+{
+  "name": "woocommerce-api",
+  "description": "A Node.js wrapper for the WooCommerce REST API",
+  "version": "1.0.0",
+  "dependencies": {},
+  "scripts": {
+    "lint": "jshint .",
+    "checkStyle": "jscs .",
+    "pretest": "npm run-script lint && npm run-script checkStyle",
+    "test": "istanbul cover ./node_modules/.bin/_mocha test",
+    "posttest": "istanbul check-coverage --statements 85 --branches 70 --functions 100 --lines 90 && rm -rf coverage"
+  },
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org"
+  },
+  "author": "Claudio Sanches @ WooThemes.com",
+  "license": "MIT",
+  "devDependencies": {
+    "istanbul": "^0.3.8",
+    "jscs": "^1.6.1",
+    "jshint": "^2.5.6",
+    "mocha": "^2.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:woothemes/wc-api-node.git"
+  }
+}
