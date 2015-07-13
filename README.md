@@ -4,6 +4,7 @@ A Node.js wrapper for the WooCommerce REST API. Easily interact with the WooComm
 
 [![build status](https://secure.travis-ci.org/woothemes/wc-api-node.svg)](http://travis-ci.org/woothemes/wc-api-node)
 [![dependency status](https://david-dm.org/woothemes/wc-api-node.svg)](https://david-dm.org/woothemes/wc-api-node)
+[![npm version](https://img.shields.io/npm/v/woocommerce-api.svg)](https://www.npmjs.com/package/woocommerce-api)
 
 ## Installation
 
