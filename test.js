@@ -12,8 +12,8 @@ describe('#Construct', function() {
   it('should set the default options', function() {
     var api = new WooCommerce({
       url: 'http://test.dev',
-      consumerKey: 'foo',
-      consumerSecret: 'foo'
+      consumerKey: 'ck_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+      consumerSecret: 'cs_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
     });
 
     chai.expect(api.version).to.equal('v3');
