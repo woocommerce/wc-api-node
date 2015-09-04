@@ -99,6 +99,7 @@ WooCommerceAPI.prototype._request = function(method, endpoint, data, callback) {
     url: url,
     method: method,
     encoding: this.encoding,
+    json: true,
     headers: {
       'User-Agent': 'WooCommerce API Client-Node.js/' + this.classVersion,
       'Content-Type': 'application/json',
