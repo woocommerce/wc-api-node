@@ -29,7 +29,7 @@ WooCommerce.get('customers', function(err, data, res) {
 // });
 
 // PUT example
-// WooCommerce.put('orders', {
+// WooCommerce.put('orders/123', {
 //   order: {
 //     status: 'completed'
 //   }
