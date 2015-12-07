@@ -75,7 +75,7 @@ WooCommerceAPI.prototype._normalizeQueryString = function(url) {
       queryString += '&';
     }
 
-    queryString += encodeURIComponent(params[i]);
+    queryString += encodeURIComponent(params[i]).replace('%5B', '[').replace('%5D', ']');
     queryString += '=';
     queryString += encodeURIComponent(query[params[i]]);
   }
