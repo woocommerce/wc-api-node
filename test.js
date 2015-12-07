@@ -98,18 +98,6 @@ describe('#Requests', function() {
     });
   });
 
-  it('should no return content when not using ssl', function(done) {
-    nock('http://test.dev/wc-api/v3').get('/orders').reply(200, {
-      ok: true
-    });
-
-    api.get('orders', function(err, data) {
-      chai.expect(err).to.exist;
-      chai.expect(data).to.not.exist;
-      done();
-    });
-  });
-
   it('should return content for OAuth', function(done) {
     var oAuth = new WooCommerce({
       url: 'http://test.dev',
