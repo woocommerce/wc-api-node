@@ -2,6 +2,7 @@
 
 var request = require('request');
 var OAuth   = require('oauth-1.0a');
+var _url    = require('url');
 
 module.exports = WooCommerceAPI;
 
@@ -49,6 +50,40 @@ WooCommerceAPI.prototype._setDefaultsOptions = function(opt) {
 };
 
 /**
+ * Normalize query string for oAuth
+ *
+ * @param  {string} url
+ * @return {string}
+ */
+WooCommerceAPI.prototype._normalizeQueryString = function(url) {
+  // Exit if don't find query string
+  if (-1 === url.indexOf('?')) {
+    return url;
+  }
+
+  var query       = _url.parse(url, true).query;
+  var params      = [];
+  var queryString = '';
+
+  for (var p in query) {
+    params.push(p);
+  }
+  params.sort();
+
+  for (var i in params) {
+    if (queryString.length) {
+      queryString += '&';
+    }
+
+    queryString += encodeURIComponent(params[i]);
+    queryString += '=';
+    queryString += encodeURIComponent(query[params[i]]);
+  }
+
+  return url.split('?')[0] + '?' + queryString;
+};
+
+/**
  * Get URL
  *
  * @param  {String} endpoint
@@ -57,8 +92,13 @@ WooCommerceAPI.prototype._setDefaultsOptions = function(opt) {
  */
 WooCommerceAPI.prototype._getUrl = function(endpoint) {
   var url = '/' === this.url.slice(-1) ? this.url : this.url + '/';
+  url = url + 'wc-api/' + this.version + '/' + endpoint;
 
-  return url + 'wc-api/' + this.version + '/' + endpoint;
+  if (!this.isSsl) {
+    return this._normalizeQueryString(url);
+  }
+
+  return url;
 };
 
 /**
