@@ -72,6 +72,7 @@ var WooCommerce = new WooCommerceAPI({
 
 ## Release History
 
+- 2015-12-07 - v1.0.4 - Updated dependencies and fixed brackets when sorting query string.
 - 2015-12-07 - v1.0.3 - Added method to properly sort query strings when using oAuth.
 - 2015-07-11 - v1.0.2 - Fixed the examples on example.js and README.md.
 - 2015-07-11 - v1.0.1 - Added unit tests, improved the main class and added full description on README.md.
