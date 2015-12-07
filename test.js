@@ -34,6 +34,22 @@ describe('#Requests', function() {
     consumerSecret: 'cs_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
   });
 
+  it('should return full API url', function() {
+    var endpoint = 'products';
+    var expected = 'https://test.dev/wc-api/v3/products';
+    var url      = api._getUrl(endpoint);
+
+    chai.assert.equal(url, expected);
+  });
+
+  it('should return sorted by name query string', function() {
+    var url        = 'http://test.dev/wc-api/v3/products?filter[q]=Woo+Album&fields=id&filter[limit]=1';
+    var expected   = 'http://test.dev/wc-api/v3/products?fields=id&filter%5Blimit%5D=1&filter%5Bq%5D=Woo%20Album';
+    var normalized = api._normalizeQueryString(url);
+
+    chai.assert.equal(normalized, expected);
+  });
+
   it('should return content for basic auth', function(done) {
     nock('https://test.dev/wc-api/v3').post('/orders', {}).reply(200, {
       ok: true
@@ -111,5 +127,4 @@ describe('#Requests', function() {
       done();
     });
   });
-
 });
