@@ -40,13 +40,14 @@ function WooCommerceAPI(opt) {
  * @param {Object} opt
  */
 WooCommerceAPI.prototype._setDefaultsOptions = function(opt) {
-  this.url            = opt.url;
-  this.version        = opt.version || 'v3';
-  this.isSsl          = /^https/i.test(this.url);
-  this.consumerKey    = opt.consumerKey;
-  this.consumerSecret = opt.consumerSecret;
-  this.verifySsl      = false === opt.verifySsl ? false : true;
-  this.encoding       = opt.encoding || 'utf8';
+  this.url             = opt.url;
+  this.version         = opt.version || 'v3';
+  this.isSsl           = /^https/i.test(this.url);
+  this.consumerKey     = opt.consumerKey;
+  this.consumerSecret  = opt.consumerSecret;
+  this.verifySsl       = false === opt.verifySsl ? false : true;
+  this.encoding        = opt.encoding || 'utf8';
+  this.queryStringAuth = opt.queryStringAuth || false;
 };
 
 /**
@@ -147,10 +148,18 @@ WooCommerceAPI.prototype._request = function(method, endpoint, data, callback) {
   };
 
   if (this.isSsl) {
-    params.auth = {
-      user: this.consumerKey,
-      pass: this.consumerSecret
-    };
+    if (this.queryStringAuth) {
+      params.qs = {
+        consumer_key: this.consumerKey,
+        consumer_secret: this.consumerSecret
+      };
+    } else {
+      params.auth = {
+        user: this.consumerKey,
+        pass: this.consumerSecret
+      };
+    }
+
     if (!this.verifySsl) {
       params.strictSSL = false;
     }
