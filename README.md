@@ -33,14 +33,15 @@ var WooCommerce = new WooCommerceAPI({
 
 ### Options
 
-|      Option      |   Type   | Required |                                             Description                                             |
-| ---------------- | -------- | -------- | --------------------------------------------------------------------------------------------------- |
-| `url`            | `String` | yes      | Your Store URL, example: http://woo.dev/                                                            |
-| `consumerKey`    | `String` | yes      | Your API consumer key                                                                               |
-| `consumerSecret` | `String` | yes      | Your API consumer secret                                                                            |
-| `version`        | `String` | no       | API version, default is `v3`                                                                        |
-| `verifySsl`      | `Bool`   | no       | Verify SSL when connect, use this option as `false` when need to test with self-signed certificates |
-| `encoding`       | `String` | no       | Encoding, default is 'utf-8'                                                                        |
+|       Option      |   Type   | Required |                                             Description                                             |
+|-------------------|----------|----------|-----------------------------------------------------------------------------------------------------|
+| `url`             | `String` | yes      | Your Store URL, example: http://woo.dev/                                                            |
+| `consumerKey`     | `String` | yes      | Your API consumer key                                                                               |
+| `consumerSecret`  | `String` | yes      | Your API consumer secret                                                                            |
+| `version`         | `String` | no       | API version, default is `v3`                                                                        |
+| `verifySsl`       | `Bool`   | no       | Verify SSL when connect, use this option as `false` when need to test with self-signed certificates |
+| `encoding`        | `String` | no       | Encoding, default is 'utf-8'                                                                        |
+| `queryStringAuth` | `Bool`   | no       | When `true` and using under HTTPS force Basic Authentication as query string, default is `false`    |
 
 ## Methods
 
@@ -72,6 +73,7 @@ var WooCommerce = new WooCommerceAPI({
 
 ## Release History
 
+- 2016-02-22 - v1.1.0 - Added `queryStringAuth` option to allow Basic Authentication as query string.
 - 2015-12-07 - v1.0.4 - Updated dependencies and fixed brackets when sorting query string.
 - 2015-12-07 - v1.0.3 - Added method to properly sort query strings when using oAuth.
 - 2015-07-11 - v1.0.2 - Fixed the examples on example.js and README.md.
