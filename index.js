@@ -48,6 +48,7 @@ WooCommerceAPI.prototype._setDefaultsOptions = function(opt) {
   this.verifySsl       = false === opt.verifySsl ? false : true;
   this.encoding        = opt.encoding || 'utf8';
   this.queryStringAuth = opt.queryStringAuth || false;
+  this.proxy           = opt.proxy || false;
 };
 
 /**
@@ -165,7 +166,7 @@ WooCommerceAPI.prototype._request = function(method, endpoint, data, callback) {
     }
   } else {
     params.qs = this._getOAuth().authorize({
-      url: url,
+      url: this.proxy ? this.proxy : url,
       method: method
     });
   }
