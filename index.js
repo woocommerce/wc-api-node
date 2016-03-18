@@ -48,7 +48,7 @@ WooCommerceAPI.prototype._setDefaultsOptions = function(opt) {
   this.verifySsl       = false === opt.verifySsl ? false : true;
   this.encoding        = opt.encoding || 'utf8';
   this.queryStringAuth = opt.queryStringAuth || false;
-  this.proxy           = opt.proxy || '';
+  this.port            = opt.port || '';
 };
 
 /**
@@ -96,32 +96,18 @@ WooCommerceAPI.prototype._getUrl = function(endpoint) {
   var url = '/' === this.url.slice(-1) ? this.url : this.url + '/';
   url = url + 'wc-api/' + this.version + '/' + endpoint;
 
+  // Include port.
+  if ('' !== this.port) {
+    var hostname = _url.parse(url, true).hostname;
+    url = url.replace(hostname, hostname + ':' + this.port);
+  }
+
   if (!this.isSsl) {
     return this._normalizeQueryString(url);
   }
 
   return url;
 };
-
-/**
- * In case of a proxy use, we need the actual aimed address for building
- * signature. This function returns the url of the endpoint according to
- * this actual adress.
- *
- * @param {String} endpoint The endpoint aimed for the request
- *
- * @returns {String} The URL of the endpoint, with proxy resolution.
- */
-WooCommerceAPI.prototype._getProxyUrl = function(endpoint) {
-  var url = '/' === this.proxy.slice(-1) ? this.proxy : this.proxy + '/';
-  url = url + 'wc-api/' + this.version + '/' + endpoint;
-
-  if (!this.isSsl) {
-    return this._normalizeQueryString(url);
-  }
-
-  return url;
-}
 
 /**
  * Get OAuth
@@ -186,8 +172,7 @@ WooCommerceAPI.prototype._request = function(method, endpoint, data, callback) {
     }
   } else {
     params.qs = this._getOAuth().authorize({
-      // If using a proxy, we need the actual address for signature
-      url: this.proxy != '' ? this._getProxyUrl(endpoint) : url,
+      url: url,
       method: method
     });
   }
