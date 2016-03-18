@@ -48,7 +48,7 @@ WooCommerceAPI.prototype._setDefaultsOptions = function(opt) {
   this.verifySsl       = false === opt.verifySsl ? false : true;
   this.encoding        = opt.encoding || 'utf8';
   this.queryStringAuth = opt.queryStringAuth || false;
-  this.proxy           = opt.proxy || null;
+  this.proxy           = opt.proxy || '';
 };
 
 /**
@@ -187,7 +187,7 @@ WooCommerceAPI.prototype._request = function(method, endpoint, data, callback) {
   } else {
     params.qs = this._getOAuth().authorize({
       // If using a proxy, we need the actual address for signature
-      url: this.proxy ? this._getProxyUrl(endpoint) : url,
+      url: this.proxy != '' ? this._getProxyUrl(endpoint) : url,
       method: method
     });
   }
