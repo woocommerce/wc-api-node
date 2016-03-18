@@ -42,6 +42,7 @@ var WooCommerce = new WooCommerceAPI({
 | `verifySsl`       | `Bool`   | no       | Verify SSL when connect, use this option as `false` when need to test with self-signed certificates |
 | `encoding`        | `String` | no       | Encoding, default is 'utf-8'                                                                        |
 | `queryStringAuth` | `Bool`   | no       | When `true` and using under HTTPS force Basic Authentication as query string, default is `false`    |
+| `port`            | `string` | no       | Provive support for URLs with ports, eg: `8080`                                                     |
 
 ## Methods
 
@@ -73,6 +74,7 @@ var WooCommerce = new WooCommerceAPI({
 
 ## Release History
 
+- 2016-03-18 - v1.1.1 - Added support for ports.
 - 2016-02-22 - v1.1.0 - Added `queryStringAuth` option to allow Basic Authentication as query string.
 - 2015-12-07 - v1.0.4 - Updated dependencies and fixed brackets when sorting query string.
 - 2015-12-07 - v1.0.3 - Added method to properly sort query strings when using oAuth.
