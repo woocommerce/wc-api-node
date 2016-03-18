@@ -48,7 +48,7 @@ WooCommerceAPI.prototype._setDefaultsOptions = function(opt) {
   this.verifySsl       = false === opt.verifySsl ? false : true;
   this.encoding        = opt.encoding || 'utf8';
   this.queryStringAuth = opt.queryStringAuth || false;
-  this.proxy           = opt.proxy || false;
+  this.proxy           = opt.proxy || null;
 };
 
 /**
