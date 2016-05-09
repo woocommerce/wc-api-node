@@ -98,6 +98,18 @@ describe('#Requests', function() {
     });
   });
 
+  it('should return content for options requests', function(done) {
+    nock('https://test.dev/wc-api/v3').options('/orders').reply(200, {
+      ok: true
+    });
+
+    api.options('orders', function(err, data) {
+      chai.expect(err).to.not.exist;
+      chai.expect(data).be.a.string;
+      done();
+    });
+  });
+
   it('should return content for OAuth', function(done) {
     var oAuth = new WooCommerce({
       url: 'http://test.dev',
