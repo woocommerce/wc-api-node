@@ -99,9 +99,7 @@ describe('#Requests', function() {
   });
 
   it('should return content for options requests', function(done) {
-    nock('https://test.dev/wc-api/v3').options('/orders').reply(200, {
-      ok: true
-    });
+    nock('https://test.dev/wc-api/v3').intercept('/orders', 'OPTIONS').reply(400);
 
     api.options('orders', function(err, data) {
       chai.expect(err).to.not.exist;
