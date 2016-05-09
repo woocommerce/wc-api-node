@@ -240,3 +240,15 @@ WooCommerceAPI.prototype.put = function(endpoint, data, callback) {
 WooCommerceAPI.prototype.delete = function(endpoint, callback) {
   return this._request('DELETE', endpoint, null, callback);
 };
+
+/**
+ * OPTIONS requests
+ *
+ * @param  {String}   endpoint
+ * @param  {Function} callback
+ *
+ * @return {Object}
+ */
+WooCommerceAPI.prototype.options = function(endpoint, callback) {
+  return this._request('OPTIONS', endpoint, null, callback);
+};
