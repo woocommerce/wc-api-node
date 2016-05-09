@@ -21,11 +21,27 @@ Check out the WooCommerce API endpoints and data that can be manipulated in <htt
 
 ## Setup
 
+Setup for the old WooCommerce API v3:
+
 ```js
 var WooCommerceAPI = require('woocommerce-api');
 
 var WooCommerce = new WooCommerceAPI({
   url: 'http://example.com',
+  consumerKey: 'ck_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+  consumerSecret: 'cs_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+});
+```
+
+Setup for the new WP REST API integration:
+
+```js
+var WooCommerceAPI = require('woocommerce-api');
+
+var WooCommerce = new WooCommerceAPI({
+  url: 'http://example.com',
+  wpAPI: true,
+  version: 'wc/v1',
   consumerKey: 'ck_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
   consumerSecret: 'cs_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 });
@@ -38,6 +54,7 @@ var WooCommerce = new WooCommerceAPI({
 | `url`             | `String` | yes      | Your Store URL, example: http://woo.dev/                                                            |
 | `consumerKey`     | `String` | yes      | Your API consumer key                                                                               |
 | `consumerSecret`  | `String` | yes      | Your API consumer secret                                                                            |
+| `wpAPI`           | `Bool`   | no       | Allow requests to the WP REST API                                                                   |
 | `version`         | `String` | no       | API version, default is `v3`                                                                        |
 | `verifySsl`       | `Bool`   | no       | Verify SSL when connect, use this option as `false` when need to test with self-signed certificates |
 | `encoding`        | `String` | no       | Encoding, default is 'utf-8'                                                                        |
@@ -72,8 +89,14 @@ var WooCommerce = new WooCommerceAPI({
 - `.delete(endpoint)`
 - `.delete(endpoint, callback)`
 
+### OPTIONS
+
+- `.options(endpoint)`
+- `.options(endpoint, callback)`
+
 ## Release History
 
+- 2016-05-09 - v1.2.0 - Added support for WP REST API and added method to do HTTP OPTIONS requests.
 - 2016-03-18 - v1.1.1 - Added support for ports.
 - 2016-02-22 - v1.1.0 - Added `queryStringAuth` option to allow Basic Authentication as query string.
 - 2015-12-07 - v1.0.4 - Updated dependencies and fixed brackets when sorting query string.

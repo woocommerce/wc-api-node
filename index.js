@@ -30,7 +30,7 @@ function WooCommerceAPI(opt) {
     throw new Error('consumerSecret is required');
   }
 
-  this.classVersion = '1.1.1';
+  this.classVersion = '1.2.0';
   this._setDefaultsOptions(opt);
 }
 

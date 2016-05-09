@@ -1,7 +1,7 @@
 {
   "name": "woocommerce-api",
   "description": "A Node.js wrapper for the WooCommerce REST API",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "scripts": {
     "lint": "jshint .",
     "checkStyle": "jscs .",
