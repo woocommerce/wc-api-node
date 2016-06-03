@@ -134,8 +134,8 @@ describe('#Requests', function() {
       timeout: 250
     });
 
-    nock('http://test.dev/wc-api/v3')
-      .get('/orders', {})
+    nock('https://test.dev/wc-api/v3')
+      .get('/orders')
       .reply(function(uri, requestBody, cb) {
         setTimeout(function() {
           return cb(null, {
