@@ -125,4 +125,29 @@ describe('#Requests', function() {
       done();
     });
   });
+
+  it('should timeout', function(done) {
+    var api = new WooCommerce({
+      url: 'https://test.dev',
+      consumerKey: 'ck_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+      consumerSecret: 'cs_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+      timeout: 1
+    });
+
+    nock('https://test.dev/wc-api/v3')
+      .get('/orders')
+      .reply(function(uri, requestBody, cb) {
+        setTimeout(function() {
+          return cb(null, {
+            orders: []
+          });
+        }, 2);
+      });
+
+    api.get('orders', function(err) {
+      chai.expect(err).to.be.a('error');
+      chai.expect(err.message).to.equal('ETIMEDOUT');
+      return done();
+    });
+  });
 });

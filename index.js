@@ -50,6 +50,7 @@ WooCommerceAPI.prototype._setDefaultsOptions = function(opt) {
   this.encoding        = opt.encoding || 'utf8';
   this.queryStringAuth = opt.queryStringAuth || false;
   this.port            = opt.port || '';
+  this.timeout         = opt.timeout;
 };
 
 /**
@@ -150,6 +151,7 @@ WooCommerceAPI.prototype._request = function(method, endpoint, data, callback) {
     url: url,
     method: method,
     encoding: this.encoding,
+    timeout: this.timeout,
     headers: {
       'User-Agent': 'WooCommerce API Client-Node.js/' + this.classVersion,
       'Content-Type': 'application/json',
