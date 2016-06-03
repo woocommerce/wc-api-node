@@ -131,7 +131,7 @@ describe('#Requests', function() {
       url: 'https://test.dev',
       consumerKey: 'ck_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
       consumerSecret: 'cs_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
-      timeout: 250
+      timeout: 1
     });
 
     nock('https://test.dev/wc-api/v3')
@@ -141,7 +141,7 @@ describe('#Requests', function() {
           return cb(null, {
             orders: []
           });
-        }, 500);
+        }, 2);
       });
 
     api.get('orders', function(err) {
