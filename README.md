@@ -33,7 +33,7 @@ var WooCommerce = new WooCommerceAPI({
 });
 ```
 
-Setup for the new WP REST API integration:
+Setup for the new WP REST API integration (WooCommerce 2.6 or later):
 
 ```js
 var WooCommerceAPI = require('woocommerce-api');
@@ -54,7 +54,7 @@ var WooCommerce = new WooCommerceAPI({
 | `url`             | `String`  | yes      | Your Store URL, example: http://woo.dev/                                                            |
 | `consumerKey`     | `String`  | yes      | Your API consumer key                                                                               |
 | `consumerSecret`  | `String`  | yes      | Your API consumer secret                                                                            |
-| `wpAPI`           | `Bool`    | no       | Allow requests to the WP REST API                                                                   |
+| `wpAPI`           | `Bool`    | no       | Allow requests to the WP REST API (WooCommerce 2.6 or later)                                        |
 | `version`         | `String`  | no       | API version, default is `v3`                                                                        |
 | `verifySsl`       | `Bool`    | no       | Verify SSL when connect, use this option as `false` when need to test with self-signed certificates |
 | `encoding`        | `String`  | no       | Encoding, default is 'utf-8'                                                                        |
