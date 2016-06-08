@@ -97,7 +97,8 @@ var WooCommerce = new WooCommerceAPI({
 
 ## Release History
 
-- 2016-06-03 - v1.3.0 - ADded new `timeout` option and updated dependencies.
+- 2016-06-08 - v1.3.1 - Fixed README.md.
+- 2016-06-03 - v1.3.0 - Added new `timeout` option and updated dependencies.
 - 2016-05-09 - v1.2.0 - Added support for WP REST API and added method to do HTTP OPTIONS requests.
 - 2016-03-18 - v1.1.1 - Added support for ports.
 - 2016-02-22 - v1.1.0 - Added `queryStringAuth` option to allow Basic Authentication as query string.
