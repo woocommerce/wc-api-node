@@ -30,7 +30,7 @@ function WooCommerceAPI(opt) {
     throw new Error('consumerSecret is required');
   }
 
-  this.classVersion = '1.3.0';
+  this.classVersion = '1.3.2';
   this._setDefaultsOptions(opt);
 }
 
@@ -127,7 +127,7 @@ WooCommerceAPI.prototype._getOAuth = function() {
     signature_method: 'HMAC-SHA256'
   };
 
-  if ('v3' !== this.version) {
+  if (-1 < ['v1', 'v2'].indexOf(this.version)) {
     data.last_ampersand = false;
   }
 
