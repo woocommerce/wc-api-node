@@ -97,6 +97,7 @@ var WooCommerce = new WooCommerceAPI({
 
 ## Release History
 
+- 2016-06-09 - v1.3.2 - Fixed oAuth signature for WP REST API.
 - 2016-06-08 - v1.3.1 - Fixed README.md.
 - 2016-06-03 - v1.3.0 - Added new `timeout` option and updated dependencies.
 - 2016-05-09 - v1.2.0 - Added support for WP REST API and added method to do HTTP OPTIONS requests.
