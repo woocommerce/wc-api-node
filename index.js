@@ -127,7 +127,7 @@ WooCommerceAPI.prototype._getOAuth = function() {
     signature_method: 'HMAC-SHA256'
   };
 
-  if (-1 < ['v1', 'v2'].indexOf(this.version)) {
+  if (-1 < [ 'v1', 'v2' ].indexOf(this.version)) {
     data.last_ampersand = false;
   }
 
