@@ -42,6 +42,7 @@ function WooCommerceAPI(opt) {
 WooCommerceAPI.prototype._setDefaultsOptions = function(opt) {
   this.url             = opt.url;
   this.wpAPI           = opt.wpAPI || false;
+  this.wpAPIPath       = opt.wpAPIPath || 'wp-json/';
   this.version         = opt.version || 'v3';
   this.isSsl           = /^https/i.test(this.url);
   this.consumerKey     = opt.consumerKey;
@@ -96,7 +97,7 @@ WooCommerceAPI.prototype._normalizeQueryString = function(url) {
  */
 WooCommerceAPI.prototype._getUrl = function(endpoint) {
   var url = '/' === this.url.slice(-1) ? this.url : this.url + '/';
-  var api = this.wpAPI ? 'wp-json/' : 'wc-api/';
+  var api = this.wpAPI ? this.wpAPIPath : 'wc-api/';
 
   url = url + api + this.version + '/' + endpoint;
 
