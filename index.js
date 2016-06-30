@@ -2,6 +2,7 @@
 
 var request = require('request');
 var OAuth   = require('oauth-1.0a');
+var promise = require('bluebird');
 var _url    = require('url');
 
 module.exports = WooCommerceAPI;
@@ -255,3 +256,8 @@ WooCommerceAPI.prototype.delete = function(endpoint, callback) {
 WooCommerceAPI.prototype.options = function(endpoint, callback) {
   return this._request('OPTIONS', endpoint, null, callback);
 };
+
+/**
+ * Promifying all requests exposing new methods named [method]Async like in getAsync()
+ */
+promise.promisifyAll( Object.getPrototypeOf(WooCommerceAPI) );
