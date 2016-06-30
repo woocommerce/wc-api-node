@@ -96,7 +96,7 @@ WooCommerceAPI.prototype._normalizeQueryString = function(url) {
  */
 WooCommerceAPI.prototype._getUrl = function(endpoint) {
   var url = '/' === this.url.slice(-1) ? this.url : this.url + '/';
-  var api = this.wpAPI ? 'wp-json/' : 'wc-api/';
+  var api = this.wpAPI ? this.wpAPI : 'wc-api/';
 
   url = url + api + this.version + '/' + endpoint;
 
