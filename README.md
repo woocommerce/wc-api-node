@@ -50,18 +50,19 @@ var WooCommerce = new WooCommerceAPI({
 
 ### Options
 
-|       Option      |    Type   | Required |                                             Description                                             |
-|-------------------|-----------|----------|-----------------------------------------------------------------------------------------------------|
-| `url`             | `String`  | yes      | Your Store URL, example: http://woo.dev/                                                            |
-| `consumerKey`     | `String`  | yes      | Your API consumer key                                                                               |
-| `consumerSecret`  | `String`  | yes      | Your API consumer secret                                                                            |
-| `wpAPI`           | `Bool`    | no       | Allow requests to the WP REST API (WooCommerce 2.6 or later)                                        |
-| `version`         | `String`  | no       | API version, default is `v3`                                                                        |
-| `verifySsl`       | `Bool`    | no       | Verify SSL when connect, use this option as `false` when need to test with self-signed certificates |
-| `encoding`        | `String`  | no       | Encoding, default is 'utf-8'                                                                        |
-| `queryStringAuth` | `Bool`    | no       | When `true` and using under HTTPS force Basic Authentication as query string, default is `false`    |
-| `port`            | `string`  | no       | Provive support for URLs with ports, eg: `8080`                                                     |
-| `timeout`         | `Integer` | no       | Define the request timeout                                                                          |
+|       Option      |    Type   | Required |                                               Description                                                |
+|-------------------|-----------|----------|----------------------------------------------------------------------------------------------------------|
+| `url`             | `String`  | yes      | Your Store URL, example: http://woo.dev/                                                                 |
+| `consumerKey`     | `String`  | yes      | Your API consumer key                                                                                    |
+| `consumerSecret`  | `String`  | yes      | Your API consumer secret                                                                                 |
+| `wpAPI`           | `Bool`    | no       | Allow requests to the WP REST API (WooCommerce 2.6 or later)                                             |
+| `wpAPIPrefix`     | `String`  | no       | Custom WP REST API URL prefix, used to support custom prefixes created with the `rest_url_prefix` filter |
+| `version`         | `String`  | no       | API version, default is `v3`                                                                             |
+| `verifySsl`       | `Bool`    | no       | Verify SSL when connect, use this option as `false` when need to test with self-signed certificates      |
+| `encoding`        | `String`  | no       | Encoding, default is 'utf-8'                                                                             |
+| `queryStringAuth` | `Bool`    | no       | When `true` and using under HTTPS force Basic Authentication as query string, default is `false`         |
+| `port`            | `string`  | no       | Provive support for URLs with ports, eg: `8080`                                                          |
+| `timeout`         | `Integer` | no       | Define the request timeout                                                                               |
 
 ## Methods
 
