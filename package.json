@@ -20,6 +20,7 @@
   "license": "MIT",
   "main": "index.js",
   "dependencies": {
+    "bluebird": "^3.4.1",
     "oauth-1.0a": "^1.0.1",
     "request": "^2.67.0"
   },

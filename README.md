@@ -96,6 +96,18 @@ var WooCommerce = new WooCommerceAPI({
 - `.options(endpoint)`
 - `.options(endpoint, callback)`
 
+## Promified Methods
+
+Every method can be used in a promified way just adding `Async` to the method name. Like in:
+
+```js
+WooCommerce
+.getAsync( 'products' )
+.then(function( result ) {
+  return JSON.parse(result.toJSON().body);
+});
+```
+
 ## Release History
 
 - 2016-06-09 - v1.3.2 - Fixed oAuth signature for WP REST API.
