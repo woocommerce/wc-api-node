@@ -102,9 +102,7 @@ var WooCommerce = new WooCommerceAPI({
 Every method can be used in a promified way just adding `Async` to the method name. Like in:
 
 ```js
-WooCommerce
-.getAsync( 'products' )
-.then(function( result ) {
+WooCommerce.getAsync('products').then(function(result) {
   return JSON.parse(result.toJSON().body);
 });
 ```
