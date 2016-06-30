@@ -40,7 +40,8 @@ var WooCommerceAPI = require('woocommerce-api');
 
 var WooCommerce = new WooCommerceAPI({
   url: 'http://example.com',
-  wpAPI: 'wp-json/', // set it to the wp rest api path
+  wpAPI: true,
+  wpAPIPath: 'wp-rest/', // [optional] the wp rest api path, defaults to 'wp-json/'
   version: 'wc/v1',
   consumerKey: 'ck_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
   consumerSecret: 'cs_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
