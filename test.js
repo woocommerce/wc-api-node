@@ -42,6 +42,23 @@ describe('#Requests', function() {
     chai.assert.equal(url, expected);
   });
 
+  it('should return full WP REST API url with a custom path', function() {
+    var restApi = new WooCommerce({
+      url: 'https://test.dev',
+      consumerKey: 'ck_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+      consumerSecret: 'cs_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+      wpAPI: true,
+      wpAPIPrefix: 'wp-rest',
+      version: 'wc/v1',
+    });
+
+    var endpoint = 'products';
+    var expected = 'https://test.dev/wp-rest/wc/v1/products';
+    var url      = restApi._getUrl(endpoint);
+
+    chai.assert.equal(url, expected);
+  });
+
   it('should return sorted by name query string', function() {
     var url        = 'http://test.dev/wc-api/v3/products?filter[q]=Woo+Album&fields=id&filter[limit]=1';
     var expected   = 'http://test.dev/wc-api/v3/products?fields=id&filter[limit]=1&filter[q]=Woo%20Album';
