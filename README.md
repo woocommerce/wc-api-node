@@ -64,46 +64,61 @@ var WooCommerce = new WooCommerceAPI({
 | `port`            | `string`  | no       | Provive support for URLs with ports, eg: `8080`                                                          |
 | `timeout`         | `Integer` | no       | Define the request timeout                                                                               |
 
-## Methods
+## Arguments
 
 |   Params   |    Type    |                         Description                          |
 |------------|------------|--------------------------------------------------------------|
 | `endpoint` | `String`   | WooCommerce API endpoint, example: `customers` or `order/12` |
-| `data`     | `Object`   | JS object, will be converted to JSON                         |
-| `callback` | `Function` | Callback function. Returns `err`, `data` and `res`           |
+| `data`     | `Object`   | [optional] JS object, will be auomatically converted as query string or json body              |
 
-### GET
+## Methods
 
-- `.get(endpoint)`
-- `.get(endpoint, callback)`
+- get
+- post
+- put
+- delete
+- options
 
-### POST
+Every method **returns a promise**.
 
-- `.post(endpoint, data)`
-- `.post(endpoint, data, callback)`
+## Usage
 
-### PUT
-
-- `.put(endpoint, data)`
-- `.put(endpoint, data, callback)`
-
-### DELETE
-
-- `.delete(endpoint)`
-- `.delete(endpoint, callback)`
-
-### OPTIONS
-
-- `.options(endpoint)`
-- `.options(endpoint, callback)`
-
-## Promified Methods
-
-Every method can be used in a promified way just adding `Async` to the method name. Like in:
+Let's get the latest 5 published products priced less than 1[your currency]:
 
 ```js
-WooCommerce.getAsync('products').then(function(result) {
-  return JSON.parse(result.toJSON().body);
+// Define a query à la WP_Query
+var _query = {
+  per_page: '5',
+  status: 'publish',
+  filter: { // nested query strings are allowed and correctly handled
+    meta_query: [
+      {
+        key: '_regular_price',
+        value: '0.99',
+        compare: '<=',
+        type: 'numeric'
+      }
+    ]
+  }
+};
+WooCommerce.get('products', _query)
+.then(function(result) { // http status code is 2xx
+  // Get some info from headers
+  console.log(result.headers['X-Powered-By']);
+
+  // The query returned at least one result
+  if ( result.body.length ) {
+    console.log(result.body); // response is automatically parsed to JS object
+  }
+
+  // No results found
+  console.log('no results for this query, try another one');
+})
+.catch(function(error) { // API call failed
+  console.log(error); // `error` is a js error object
+})
+.finally(function() {
+  return 'Operation finished whether or not it was successfull';
 });
 ```
 
