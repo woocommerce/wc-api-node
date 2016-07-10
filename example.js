@@ -15,7 +15,26 @@ var WooCommerce = new WooCommerceAPI({
 // GET example
 WooCommerce.get('customers').then(function(res) {
   console.log(res);
+}).catch(function(err) {
+  console.log(err);
 });
+
+// alternative syntax
+// WooCommerce.get('customers').then(function(res) {
+//   console.log(res);
+// }, function(err) {
+//   console.log(err);
+// });
+
+// callback style
+// WooCommerce.get( 'customers' ).promise().asCallback( function(err, data) {
+//   if ( err ) {
+//     console.warn(err);
+//   }
+//   else {
+//     console.log(data);
+//   }
+// });
 
 // POST example
 // WooCommerce.post('products', {
