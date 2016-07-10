@@ -1,8 +1,7 @@
 'use strict';
 
-var request = require('request');
+var request = require('request-promise');
 var OAuth   = require('oauth-1.0a');
-var promise = require('bluebird');
 var _url    = require('url');
 
 module.exports = WooCommerceAPI;
@@ -142,11 +141,10 @@ WooCommerceAPI.prototype._getOAuth = function() {
  * @param  {String}   method
  * @param  {String}   endpoint
  * @param  {Object}   data
- * @param  {Function} callback
  *
- * @return {Object}
+ * @return {Promise}
  */
-WooCommerceAPI.prototype._request = function(method, endpoint, data, callback) {
+WooCommerceAPI.prototype._request = function(method, endpoint, data) {
   var url = this._getUrl(endpoint);
 
   var params = {
@@ -158,7 +156,9 @@ WooCommerceAPI.prototype._request = function(method, endpoint, data, callback) {
       'User-Agent': 'WooCommerce API Client-Node.js/' + this.classVersion,
       'Content-Type': 'application/json',
       'Accept': 'application/json'
-    }
+    },
+    resolveWithFullResponse: true, // get the full response instead of just the body
+    json: true // automatically parses/stringifies JSON
   };
 
   if (this.isSsl) {
@@ -184,27 +184,24 @@ WooCommerceAPI.prototype._request = function(method, endpoint, data, callback) {
     });
   }
 
-  if (data) {
-    params.body = JSON.stringify(data);
+  if ( data ) {
+    if ( method == 'GET' ) params.qs = data
+    else params.body = data;
   }
 
-  if (!callback) {
-    return request(params);
-  }
-
-  return request(params, callback);
+  return request(params);
 };
 
 /**
  * GET requests
  *
  * @param  {String}   endpoint
- * @param  {Function} callback
+ * @param  {Object} query paramaters
  *
- * @return {Object}
+ * @return {Promise}
  */
-WooCommerceAPI.prototype.get = function(endpoint, callback) {
-  return this._request('GET', endpoint, null, callback);
+WooCommerceAPI.prototype.get = function(endpoint, data) {
+  return this._request('GET', endpoint, data);
 };
 
 /**
@@ -212,12 +209,11 @@ WooCommerceAPI.prototype.get = function(endpoint, callback) {
  *
  * @param  {String}   endpoint
  * @param  {Object}   data
- * @param  {Function} callback
  *
- * @return {Object}
+ * @return {Promise}
  */
-WooCommerceAPI.prototype.post = function(endpoint, data, callback) {
-  return this._request('POST', endpoint, data, callback);
+WooCommerceAPI.prototype.post = function(endpoint, data) {
+  return this._request('POST', endpoint, data);
 };
 
 /**
@@ -225,39 +221,31 @@ WooCommerceAPI.prototype.post = function(endpoint, data, callback) {
  *
  * @param  {String}   endpoint
  * @param  {Object}   data
- * @param  {Function} callback
  *
- * @return {Object}
+ * @return {Promise}
  */
-WooCommerceAPI.prototype.put = function(endpoint, data, callback) {
-  return this._request('PUT', endpoint, data, callback);
+WooCommerceAPI.prototype.put = function(endpoint, data) {
+  return this._request('PUT', endpoint, data);
 };
 
 /**
  * DELETE requests
  *
  * @param  {String}   endpoint
- * @param  {Function} callback
  *
- * @return {Object}
+ * @return {Promise}
  */
-WooCommerceAPI.prototype.delete = function(endpoint, callback) {
-  return this._request('DELETE', endpoint, null, callback);
+WooCommerceAPI.prototype.delete = function(endpoint) {
+  return this._request('DELETE', endpoint, null);
 };
 
 /**
  * OPTIONS requests
  *
  * @param  {String}   endpoint
- * @param  {Function} callback
  *
- * @return {Object}
+ * @return {Promise}
  */
-WooCommerceAPI.prototype.options = function(endpoint, callback) {
-  return this._request('OPTIONS', endpoint, null, callback);
+WooCommerceAPI.prototype.options = function(endpoint) {
+  return this._request('OPTIONS', endpoint, null);
 };
-
-/**
- * Promifying all requests exposing new methods named [method]Async like in getAsync()
- */
-promise.promisifyAll(Object.getPrototypeOf(WooCommerceAPI));
