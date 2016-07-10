@@ -13,7 +13,7 @@ var WooCommerce = new WooCommerceAPI({
 });
 
 // GET example
-WooCommerce.get('customers', function(err, data, res) {
+WooCommerce.get('customers').then(function(res) {
   console.log(res);
 });
 
@@ -24,7 +24,8 @@ WooCommerce.get('customers', function(err, data, res) {
 //     type: 'simple',
 //     regular_price: '21.99'
 //   }
-// }, function(err, data, res) {
+// )
+// .then(function(res) {
 //   console.log(res);
 // });
 
@@ -33,11 +34,11 @@ WooCommerce.get('customers', function(err, data, res) {
 //   order: {
 //     status: 'completed'
 //   }
-// }, function(err, data, res) {
+// }).then(function(res) {
 //   console.log(res);
 // });
 
 // Delete example
-// WooCommerce.delete('coupons/123', function(err, data, res) {
+// WooCommerce.delete('coupons/123').then(function(res) {
 //   console.log(res);
 // });
