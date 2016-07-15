@@ -116,7 +116,9 @@ describe('#Requests', function() {
   });
 
   it('should return content for options requests', function(done) {
-    nock('https://test.dev/wc-api/v3').intercept('/orders', 'OPTIONS').reply(400);
+    nock('https://test.dev/wc-api/v3').intercept('/orders', 'OPTIONS').reply(200, {
+      ok: true
+    });
 
     api.options('orders').promise().asCallback(function(err, data) {
       chai.expect(err).to.not.exist;
