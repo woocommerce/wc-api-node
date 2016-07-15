@@ -185,8 +185,12 @@ WooCommerceAPI.prototype._request = function(method, endpoint, data) {
   }
 
   if ( data ) {
-    if ( method == 'GET' ) params.qs = data
-    else params.body = data;
+    if ( method === 'GET' ) {
+      params.qs = data;
+    }
+    else {
+      params.body = data;
+    }
   }
 
   return request(params);
