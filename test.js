@@ -125,6 +125,56 @@ describe('#Requests', function() {
     });
   });
 
+  it('should return a promise for getAsync requests', function(done) {
+    nock('https://test.dev/wc-api/v3').get('/orders').reply(200, {
+      ok: true
+    });
+
+    api.getAsync('orders').then(function(data) {
+      chai.expect(data).be.a.string;
+      done();
+    }).catch(function(err) {
+      done(err);
+    });
+  });
+
+  it('should return a promise for putAsync requests', function(done) {
+    nock('https://test.dev/wc-api/v3').put('/orders', {}).reply(200, {
+      ok: true
+    });
+
+    api.putAsync('orders', {}).then(function(data) {
+      chai.expect(data).be.a.string;
+      done();
+    }).catch(function(err) {
+      done(err);
+    });
+  });
+
+  it('should return a promise for deleteAsync requests', function(done) {
+    nock('https://test.dev/wc-api/v3').delete('/orders').reply(200, {
+      ok: true
+    });
+
+    api.deleteAsync('orders').then(function(data) {
+      chai.expect(data).be.a.string;
+      done();
+    }).catch(function(err) {
+      done(err);
+    });
+  });
+
+  it('should return a promise for optionsAsync requests', function(done) {
+    nock('https://test.dev/wc-api/v3').intercept('/orders', 'OPTIONS').reply(400);
+
+    api.optionsAsync('orders').then(function(data) {
+      chai.expect(data).be.a.string;
+      done();
+    }).catch(function(err) {
+      done(err);
+    });
+  });
+
   it('should return content for OAuth', function(done) {
     var oAuth = new WooCommerce({
       url: 'http://test.dev',
