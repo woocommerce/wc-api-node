@@ -260,4 +260,4 @@ WooCommerceAPI.prototype.options = function(endpoint, callback) {
 /**
  * Promifying all requests exposing new methods named [method]Async like in getAsync()
  */
-promise.promisifyAll(Object.getPrototypeOf(WooCommerceAPI));
+promise.promisifyAll(WooCommerceAPI.prototype);
