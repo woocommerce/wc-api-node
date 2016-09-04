@@ -252,8 +252,3 @@ WooCommerceAPI.prototype.delete = function(endpoint) {
 WooCommerceAPI.prototype.options = function(endpoint) {
   return this._request('OPTIONS', endpoint, null);
 };
-
-/**
- * Promifying all requests exposing new methods named [method]Async like in getAsync()
- */
-promise.promisifyAll(WooCommerceAPI.prototype);
