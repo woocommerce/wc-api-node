@@ -20,9 +20,9 @@
   "license": "MIT",
   "main": "index.js",
   "dependencies": {
-    "bluebird": "^3.4.1",
     "oauth-1.0a": "^1.0.1",
-    "request": "^2.67.0"
+    "request": "^2.74.0",
+    "request-promise": "^4.1.1"
   },
   "devDependencies": {
     "chai": "^3.4.1",

@@ -72,7 +72,7 @@ describe('#Requests', function() {
       ok: true
     });
 
-    api.post('orders', {}, function(err, data) {
+    api.post('orders', {}).promise().asCallback(function(err, data) {
       chai.expect(err).to.not.exist;
       chai.expect(data).be.a.string;
       done();
@@ -84,7 +84,7 @@ describe('#Requests', function() {
       ok: true
     });
 
-    api.get('orders', function(err, data) {
+    api.get('orders').promise().asCallback(function(err, data) {
       chai.expect(err).to.not.exist;
       chai.expect(data).be.a.string;
       done();
@@ -96,7 +96,7 @@ describe('#Requests', function() {
       ok: true
     });
 
-    api.put('orders', {}, function(err, data) {
+    api.put('orders', {}).promise().asCallback(function(err, data) {
       chai.expect(err).to.not.exist;
       chai.expect(data).be.a.string;
       done();
@@ -108,7 +108,7 @@ describe('#Requests', function() {
       ok: true
     });
 
-    api.delete('orders', function(err, data) {
+    api.delete('orders').promise().asCallback(function(err, data) {
       chai.expect(err).to.not.exist;
       chai.expect(data).be.a.string;
       done();
@@ -116,9 +116,11 @@ describe('#Requests', function() {
   });
 
   it('should return content for options requests', function(done) {
-    nock('https://test.dev/wc-api/v3').intercept('/orders', 'OPTIONS').reply(400);
+    nock('https://test.dev/wc-api/v3').intercept('/orders', 'OPTIONS').reply(200, {
+      ok: true
+    });
 
-    api.options('orders', function(err, data) {
+    api.options('orders').promise().asCallback(function(err, data) {
       chai.expect(err).to.not.exist;
       chai.expect(data).be.a.string;
       done();
@@ -186,7 +188,7 @@ describe('#Requests', function() {
       ok: true
     });
 
-    oAuth.get('orders', function(err, data) {
+    oAuth.get('orders').promise().asCallback(function(err, data) {
       chai.expect(err).to.not.exist;
       chai.expect(data).be.a.string;
       done();
