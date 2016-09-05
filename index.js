@@ -152,6 +152,9 @@ WooCommerceAPI.prototype._request = function(method, endpoint, data) {
     method: method,
     encoding: this.encoding,
     timeout: this.timeout,
+    qsStringifyOptions: {
+      encode: false // do not encode arrays within query strings
+    },
     headers: {
       'User-Agent': 'WooCommerce API Client-Node.js/' + this.classVersion,
       'Content-Type': 'application/json',
