@@ -13,10 +13,12 @@ describe('#Construct', function() {
     var api = new WooCommerce({
       url: 'http://test.dev',
       consumerKey: 'ck_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
-      consumerSecret: 'cs_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+      consumerSecret: 'cs_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+      wpAPI: true,
+      version: 'wc/v1'
     });
 
-    chai.expect(api.version).to.equal('v3');
+    chai.expect(api.version).to.equal('wc/v1');
     chai.expect(api.isSsl).to.be.false;
     chai.expect(api.verifySsl).to.be.true;
     chai.expect(api.encoding).to.equal('utf8');
@@ -31,12 +33,14 @@ describe('#Requests', function() {
   var api = new WooCommerce({
     url: 'https://test.dev',
     consumerKey: 'ck_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
-    consumerSecret: 'cs_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+    consumerSecret: 'cs_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+    wpAPI: true,
+    version: 'wc/v1'
   });
 
   it('should return full API url', function() {
     var endpoint = 'products';
-    var expected = 'https://test.dev/wc-api/v3/products';
+    var expected = 'https://test.dev/wp-json/wc/v1/products';
     var url      = api._getUrl(endpoint);
 
     chai.assert.equal(url, expected);
@@ -60,15 +64,15 @@ describe('#Requests', function() {
   });
 
   it('should return sorted by name query string', function() {
-    var url        = 'http://test.dev/wc-api/v3/products?filter[q]=Woo+Album&fields=id&filter[limit]=1';
-    var expected   = 'http://test.dev/wc-api/v3/products?fields=id&filter[limit]=1&filter[q]=Woo%20Album';
+    var url        = 'http://test.dev/wp-json/wc/v1/products?filter[q]=Woo+Album&fields=id&filter[limit]=1';
+    var expected   = 'http://test.dev/wp-json/wc/v1/products?fields=id&filter[limit]=1&filter[q]=Woo%20Album';
     var normalized = api._normalizeQueryString(url);
 
     chai.assert.equal(normalized, expected);
   });
 
   it('should return content for basic auth', function(done) {
-    nock('https://test.dev/wc-api/v3').post('/orders', {}).reply(200, {
+    nock('https://test.dev/wp-json/wc/v1').post('/orders', {}).reply(200, {
       ok: true
     });
 
@@ -80,7 +84,7 @@ describe('#Requests', function() {
   });
 
   it('should return content for get requests', function(done) {
-    nock('https://test.dev/wc-api/v3').get('/orders').reply(200, {
+    nock('https://test.dev/wp-json/wc/v1').get('/orders').reply(200, {
       ok: true
     });
 
@@ -92,7 +96,7 @@ describe('#Requests', function() {
   });
 
   it('should return content for put requests', function(done) {
-    nock('https://test.dev/wc-api/v3').put('/orders', {}).reply(200, {
+    nock('https://test.dev/wp-json/wc/v1').put('/orders', {}).reply(200, {
       ok: true
     });
 
@@ -104,7 +108,7 @@ describe('#Requests', function() {
   });
 
   it('should return content for delete requests', function(done) {
-    nock('https://test.dev/wc-api/v3').delete('/orders').reply(200, {
+    nock('https://test.dev/wp-json/wc/v1').delete('/orders').reply(200, {
       ok: true
     });
 
@@ -116,7 +120,7 @@ describe('#Requests', function() {
   });
 
   it('should return content for options requests', function(done) {
-    nock('https://test.dev/wc-api/v3').intercept('/orders', 'OPTIONS').reply(400);
+    nock('https://test.dev/wp-json/wc/v1').intercept('/orders', 'OPTIONS').reply(400);
 
     api.options('orders', function(err, data) {
       chai.expect(err).to.not.exist;
@@ -126,52 +130,55 @@ describe('#Requests', function() {
   });
 
   it('should return a promise for getAsync requests', function(done) {
-    nock('https://test.dev/wc-api/v3').get('/orders').reply(200, {
+    nock('https://test.dev/wp-json/wc/v1').get('/orders').reply(200, {
       ok: true
     });
 
-    api.getAsync('orders').then(function(data) {
+    api.getAsync('orders').finally(function(data) {
       chai.expect(data).be.a.string;
       done();
-    }).catch(function(err) {
-      done(err);
+    });
+  });
+
+  it('should return a promise for postAsync requests', function(done) {
+    nock('https://test.dev/wp-json/wc/v1').post('/orders', {}).reply(200, {
+      ok: true
+    });
+
+    api.postAsync('orders', {}).finally(function(data) {
+      chai.expect(data).be.a.string;
+      done();
     });
   });
 
   it('should return a promise for putAsync requests', function(done) {
-    nock('https://test.dev/wc-api/v3').put('/orders', {}).reply(200, {
+    nock('https://test.dev/wp-json/wc/v1').put('/orders', {}).reply(200, {
       ok: true
     });
 
-    api.putAsync('orders', {}).then(function(data) {
+    api.putAsync('orders', {}).finally(function(data) {
       chai.expect(data).be.a.string;
       done();
-    }).catch(function(err) {
-      done(err);
     });
   });
 
   it('should return a promise for deleteAsync requests', function(done) {
-    nock('https://test.dev/wc-api/v3').delete('/orders').reply(200, {
+    nock('https://test.dev/wp-json/wc/v1').delete('/orders').reply(200, {
       ok: true
     });
 
-    api.deleteAsync('orders').then(function(data) {
+    api.deleteAsync('orders').finally(function(data) {
       chai.expect(data).be.a.string;
       done();
-    }).catch(function(err) {
-      done(err);
     });
   });
 
   it('should return a promise for optionsAsync requests', function(done) {
-    nock('https://test.dev/wc-api/v3').intercept('/orders', 'OPTIONS').reply(400);
+    nock('https://test.dev/wp-json/wc/v1').intercept('/orders', 'OPTIONS').reply(400);
 
-    api.optionsAsync('orders').then(function(data) {
+    api.optionsAsync('orders').finally(function(data) {
       chai.expect(data).be.a.string;
       done();
-    }).catch(function(err) {
-      done(err);
     });
   });
 
@@ -179,10 +186,12 @@ describe('#Requests', function() {
     var oAuth = new WooCommerce({
       url: 'http://test.dev',
       consumerKey: 'ck_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
-      consumerSecret: 'cs_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+      consumerSecret: 'cs_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+      wpAPI: true,
+      version: 'wc/v1'
     });
 
-    nock('http://test.dev/wc-api/v3').filteringPath(/\?.*/, '?params').get('/orders?params').reply(200, {
+    nock('http://test.dev/wp-json/wc/v1').filteringPath(/\?.*/, '?params').get('/orders?params').reply(200, {
       ok: true
     });
 
@@ -192,5 +201,4 @@ describe('#Requests', function() {
       done();
     });
   });
-
 });
