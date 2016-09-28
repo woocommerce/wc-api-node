@@ -2,6 +2,7 @@
 
 var request = require('request');
 var OAuth   = require('oauth-1.0a');
+var crypto  = require('crypto');
 var promise = require('bluebird');
 var _url    = require('url');
 
@@ -81,7 +82,8 @@ WooCommerceAPI.prototype._normalizeQueryString = function(url) {
       queryString += '&';
     }
 
-    queryString += encodeURIComponent(params[i]).replace('%5B', '[').replace('%5D', ']');
+    queryString += encodeURIComponent(params[i]).replace('%5B', '[')
+      .replace('%5D', ']');
     queryString += '=';
     queryString += encodeURIComponent(query[params[i]]);
   }
@@ -123,10 +125,14 @@ WooCommerceAPI.prototype._getUrl = function(endpoint) {
 WooCommerceAPI.prototype._getOAuth = function() {
   var data = {
     consumer: {
-      public: this.consumerKey,
+      key: this.consumerKey,
       secret: this.consumerSecret
     },
-    signature_method: 'HMAC-SHA256'
+    signature_method: 'HMAC-SHA256',
+    hash_function: function(base_string, key) {
+        return crypto.createHmac('sha256', key).update(base_string)
+          .digest('base64');
+    }
   };
 
   if (-1 < [ 'v1', 'v2' ].indexOf(this.version)) {
@@ -258,6 +264,7 @@ WooCommerceAPI.prototype.options = function(endpoint, callback) {
 };
 
 /**
- * Promifying all requests exposing new methods named [method]Async like in getAsync()
+ * Promifying all requests exposing new methods
+ * named [method]Async like in getAsync()
  */
 promise.promisifyAll(WooCommerceAPI.prototype);
