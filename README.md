@@ -109,7 +109,8 @@ WooCommerce.getAsync('products').then(function(result) {
 
 ## Release History
 
-- 2016-06-39 - v1.4.0 - Added `wpAPIPrefix` option to allow custom WP REST API Url prefix and support for promified methods.
+- 2016-09-28 - v1.4.1 - Updated dependencies and updated/fixed oAuth1.0a.
+- 2016-06-30 - v1.4.0 - Added `wpAPIPrefix` option to allow custom WP REST API Url prefix and support for promified methods.
 - 2016-06-09 - v1.3.2 - Fixed oAuth signature for WP REST API.
 - 2016-06-08 - v1.3.1 - Fixed README.md.
 - 2016-06-03 - v1.3.0 - Added new `timeout` option and updated dependencies.
