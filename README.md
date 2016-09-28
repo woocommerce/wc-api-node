@@ -2,8 +2,8 @@
 
 A Node.js wrapper for the WooCommerce REST API. Easily interact with the WooCommerce REST API using this library.
 
-[![build status](https://secure.travis-ci.org/woothemes/wc-api-node.svg)](http://travis-ci.org/woothemes/wc-api-node)
-[![dependency status](https://david-dm.org/woothemes/wc-api-node.svg)](https://david-dm.org/woothemes/wc-api-node)
+[![build status](https://secure.travis-ci.org/woocommerce/wc-api-node.svg)](http://travis-ci.org/woocommerce/wc-api-node)
+[![dependency status](https://david-dm.org/woocommerce/wc-api-node.svg)](https://david-dm.org/woocommerce/wc-api-node)
 [![npm version](https://img.shields.io/npm/v/woocommerce-api.svg)](https://www.npmjs.com/package/woocommerce-api)
 
 ## Installation
@@ -14,10 +14,10 @@ npm install --save woocommerce-api
 
 ## Getting started
 
-Generate API credentials (Consumer Key & Consumer Secret) following this instructions <http://docs.woothemes.com/document/woocommerce-rest-api/>
+Generate API credentials (Consumer Key & Consumer Secret) following this instructions <http://docs.woocommerce.com/document/woocommerce-rest-api/>
 .
 
-Check out the WooCommerce API endpoints and data that can be manipulated in <http://woothemes.github.io/woocommerce-rest-api-docs/>.
+Check out the WooCommerce API endpoints and data that can be manipulated in <http://woocommerce.github.io/woocommerce-rest-api-docs/>.
 
 ## Setup
 

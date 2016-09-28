@@ -34,6 +34,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:woothemes/wc-api-node.git"
+    "url": "git@github.com:woocommerce/wc-api-node.git"
   }
 }
