@@ -162,7 +162,6 @@ WooCommerceAPI.prototype._request = function(method, endpoint, data, callback) {
     timeout: this.timeout,
     headers: {
       'User-Agent': 'WooCommerce API Client-Node.js/' + this.classVersion,
-      'Content-Type': 'application/json',
       'Accept': 'application/json'
     }
   };
@@ -191,6 +190,7 @@ WooCommerceAPI.prototype._request = function(method, endpoint, data, callback) {
   }
 
   if (data) {
+    params.headers['Content-Type'] = 'application/json;charset=utf-8';
     params.body = JSON.stringify(data);
   }
 
