@@ -21,18 +21,6 @@ Check out the WooCommerce API endpoints and data that can be manipulated in <htt
 
 ## Setup
 
-Setup for the old WooCommerce API v3:
-
-```js
-var WooCommerceAPI = require('woocommerce-api');
-
-var WooCommerce = new WooCommerceAPI({
-  url: 'http://example.com',
-  consumerKey: 'ck_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
-  consumerSecret: 'cs_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
-});
-```
-
 Setup for the new WP REST API integration (WooCommerce 2.6 or later):
 
 ```js
@@ -44,6 +32,19 @@ var WooCommerce = new WooCommerceAPI({
   consumerSecret: 'cs_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
   wpAPI: true,
   version: 'wc/v1'
+});
+```
+
+Setup for the old WooCommerce legacy API:
+
+```js
+var WooCommerceAPI = require('woocommerce-api');
+
+var WooCommerce = new WooCommerceAPI({
+  url: 'http://example.com',
+  consumerKey: 'ck_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+  consumerSecret: 'cs_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+  version: 'v3'
 });
 ```
 
@@ -108,6 +109,7 @@ WooCommerce.getAsync('products').then(function(result) {
 
 ## Release History
 
+- 2016-12-14 - v1.4.2 - Fixed WordPress 4.7 compatibility.
 - 2016-09-28 - v1.4.1 - Updated dependencies and updated/fixed oAuth1.0a.
 - 2016-06-30 - v1.4.0 - Added `wpAPIPrefix` option to allow custom WP REST API Url prefix and support for promified methods.
 - 2016-06-09 - v1.3.2 - Fixed oAuth signature for WP REST API.
