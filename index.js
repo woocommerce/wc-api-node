@@ -1,10 +1,10 @@
 'use strict';
 
 var request = require('request');
-var OAuth   = require('oauth-1.0a');
-var crypto  = require('crypto');
+var OAuth = require('oauth-1.0a');
+var crypto = require('crypto');
 var promise = require('bluebird');
-var _url    = require('url');
+var _url = require('url');
 
 module.exports = WooCommerceAPI;
 
@@ -41,19 +41,19 @@ function WooCommerceAPI(opt) {
  *
  * @param {Object} opt
  */
-WooCommerceAPI.prototype._setDefaultsOptions = function(opt) {
-  this.url             = opt.url;
-  this.wpAPI           = opt.wpAPI || false;
-  this.wpAPIPrefix     = opt.wpAPIPrefix || 'wp-json';
-  this.version         = opt.version || 'v3';
-  this.isSsl           = /^https/i.test(this.url);
-  this.consumerKey     = opt.consumerKey;
-  this.consumerSecret  = opt.consumerSecret;
-  this.verifySsl       = false === opt.verifySsl ? false : true;
-  this.encoding        = opt.encoding || 'utf8';
+WooCommerceAPI.prototype._setDefaultsOptions = function (opt) {
+  this.url = opt.url;
+  this.wpAPI = opt.wpAPI || false;
+  this.wpAPIPrefix = opt.wpAPIPrefix || 'wp-json';
+  this.version = opt.version || 'v3';
+  this.isSsl = /^https/i.test(this.url);
+  this.consumerKey = opt.consumerKey;
+  this.consumerSecret = opt.consumerSecret;
+  this.verifySsl = false === opt.verifySsl ? false : true;
+  this.encoding = opt.encoding || 'utf8';
   this.queryStringAuth = opt.queryStringAuth || false;
-  this.port            = opt.port || '';
-  this.timeout         = opt.timeout;
+  this.port = opt.port || '';
+  this.timeout = opt.timeout;
 };
 
 /**
@@ -62,30 +62,34 @@ WooCommerceAPI.prototype._setDefaultsOptions = function(opt) {
  * @param  {string} url
  * @return {string}
  */
-WooCommerceAPI.prototype._normalizeQueryString = function(url) {
+WooCommerceAPI.prototype._normalizeQueryString = function (url) {
   // Exit if don't find query string
   if (-1 === url.indexOf('?')) {
     return url;
   }
 
-  var query       = _url.parse(url, true).query;
-  var params      = [];
+  var query = _url.parse(url, true).query;
+  var params = [];
   var queryString = '';
 
   for (var p in query) {
-    params.push(p);
+    if (query.hasOwnProperty(p)) {
+      params.push(p);
+    }
   }
   params.sort();
 
   for (var i in params) {
-    if (queryString.length) {
-      queryString += '&';
-    }
+    if (params.hasOwnProperty(i)) {
+      if (queryString.length) {
+        queryString += '&';
+      }
 
-    queryString += encodeURIComponent(params[i]).replace('%5B', '[')
-      .replace('%5D', ']');
-    queryString += '=';
-    queryString += encodeURIComponent(query[params[i]]);
+      queryString += encodeURIComponent(params[i]).replace('%5B', '[')
+        .replace('%5D', ']');
+      queryString += '=';
+      queryString += encodeURIComponent(query[params[i]]);
+    }
   }
 
   return url.split('?')[0] + '?' + queryString;
@@ -98,7 +102,7 @@ WooCommerceAPI.prototype._normalizeQueryString = function(url) {
  *
  * @return {String}
  */
-WooCommerceAPI.prototype._getUrl = function(endpoint) {
+WooCommerceAPI.prototype._getUrl = function (endpoint) {
   var url = '/' === this.url.slice(-1) ? this.url : this.url + '/';
   var api = this.wpAPI ? this.wpAPIPrefix + '/' : 'wc-api/';
 
@@ -122,20 +126,20 @@ WooCommerceAPI.prototype._getUrl = function(endpoint) {
  *
  * @return {Object}
  */
-WooCommerceAPI.prototype._getOAuth = function() {
+WooCommerceAPI.prototype._getOAuth = function () {
   var data = {
-    consumer: {
-      key: this.consumerKey,
+    consumer        : {
+      key   : this.consumerKey,
       secret: this.consumerSecret
     },
     signature_method: 'HMAC-SHA256',
-    hash_function: function(base_string, key) {
-        return crypto.createHmac('sha256', key).update(base_string)
-          .digest('base64');
+    hash_function   : function (base_string, key) {
+      return crypto.createHmac('sha256', key).update(base_string)
+        .digest('base64');
     }
   };
 
-  if (-1 < [ 'v1', 'v2' ].indexOf(this.version)) {
+  if (-1 < ['v1', 'v2'].indexOf(this.version)) {
     data.last_ampersand = false;
   }
 
@@ -152,24 +156,24 @@ WooCommerceAPI.prototype._getOAuth = function() {
  *
  * @return {Object}
  */
-WooCommerceAPI.prototype._request = function(method, endpoint, data, callback) {
+WooCommerceAPI.prototype._request = function (method, endpoint, data, callback) {
   var url = this._getUrl(endpoint);
 
   var params = {
-    url: url,
-    method: method,
+    url     : url,
+    method  : method,
     encoding: this.encoding,
-    timeout: this.timeout,
-    headers: {
+    timeout : this.timeout,
+    headers : {
       'User-Agent': 'WooCommerce API Client-Node.js/' + this.classVersion,
-      'Accept': 'application/json'
+      'Accept'    : 'application/json'
     }
   };
 
   if (this.isSsl) {
     if (this.queryStringAuth) {
       params.qs = {
-        consumer_key: this.consumerKey,
+        consumer_key   : this.consumerKey,
         consumer_secret: this.consumerSecret
       };
     } else {
@@ -184,7 +188,7 @@ WooCommerceAPI.prototype._request = function(method, endpoint, data, callback) {
     }
   } else {
     params.qs = this._getOAuth().authorize({
-      url: url,
+      url   : url,
       method: method
     });
   }
@@ -209,7 +213,7 @@ WooCommerceAPI.prototype._request = function(method, endpoint, data, callback) {
  *
  * @return {Object}
  */
-WooCommerceAPI.prototype.get = function(endpoint, callback) {
+WooCommerceAPI.prototype.get = function (endpoint, callback) {
   return this._request('GET', endpoint, null, callback);
 };
 
@@ -222,7 +226,7 @@ WooCommerceAPI.prototype.get = function(endpoint, callback) {
  *
  * @return {Object}
  */
-WooCommerceAPI.prototype.post = function(endpoint, data, callback) {
+WooCommerceAPI.prototype.post = function (endpoint, data, callback) {
   return this._request('POST', endpoint, data, callback);
 };
 
@@ -235,7 +239,7 @@ WooCommerceAPI.prototype.post = function(endpoint, data, callback) {
  *
  * @return {Object}
  */
-WooCommerceAPI.prototype.put = function(endpoint, data, callback) {
+WooCommerceAPI.prototype.put = function (endpoint, data, callback) {
   return this._request('PUT', endpoint, data, callback);
 };
 
@@ -247,7 +251,7 @@ WooCommerceAPI.prototype.put = function(endpoint, data, callback) {
  *
  * @return {Object}
  */
-WooCommerceAPI.prototype.delete = function(endpoint, callback) {
+WooCommerceAPI.prototype.delete = function (endpoint, callback) {
   return this._request('DELETE', endpoint, null, callback);
 };
 
@@ -259,7 +263,7 @@ WooCommerceAPI.prototype.delete = function(endpoint, callback) {
  *
  * @return {Object}
  */
-WooCommerceAPI.prototype.options = function(endpoint, callback) {
+WooCommerceAPI.prototype.options = function (endpoint, callback) {
   return this._request('OPTIONS', endpoint, null, callback);
 };
 
