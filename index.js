@@ -1,10 +1,10 @@
 'use strict';
 
-var request = require('request');
-var OAuth   = require('oauth-1.0a');
-var crypto  = require('crypto');
-var promise = require('bluebird');
-var _url    = require('url');
+var request    = require('request');
+var OAuth      = require('oauth-1.0a');
+var createHmac = require('create-hmac');
+var promise    = require('bluebird');
+var _url       = require('url');
 
 module.exports = WooCommerceAPI;
 
@@ -130,7 +130,7 @@ WooCommerceAPI.prototype._getOAuth = function() {
     },
     signature_method: 'HMAC-SHA256',
     hash_function: function(base_string, key) {
-        return crypto.createHmac('sha256', key).update(base_string)
+        return createHmac('sha256', key).update(base_string)
           .digest('base64');
     }
   };
