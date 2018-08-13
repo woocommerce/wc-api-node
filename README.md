@@ -61,7 +61,7 @@ var WooCommerce = new WooCommerceAPI({
 | `verifySsl`       | `Bool`    | no       | Verify SSL when connect, use this option as `false` when need to test with self-signed certificates      |
 | `encoding`        | `String`  | no       | Encoding, default is 'utf-8'                                                                             |
 | `queryStringAuth` | `Bool`    | no       | When `true` and using under HTTPS force Basic Authentication as query string, default is `false`         |
-| `port`            | `string`  | no       | Provive support for URLs with ports, eg: `8080`                                                          |
+| `port`            | `string`  | no       | Provide support for URLs with ports, eg: `8080`                                                          |
 | `timeout`         | `Integer` | no       | Define the request timeout                                                                               |
 
 ## Methods
