@@ -1,6 +1,10 @@
 var WooCommerce = require('./index.js');
 var chai = require('chai');
 var nock = require('nock');
+var Agent = require('http').Agent;
+var HttpsAgent = require('https').Agent;
+var agent = new Agent();
+var httpsAgent = new HttpsAgent();
 
 describe('#Construct', function() {
   it('should throw an error if the url, consumerKey or consumerSecret are missing', function() {
@@ -15,13 +19,15 @@ describe('#Construct', function() {
       consumerKey: 'ck_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
       consumerSecret: 'cs_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
       wpAPI: true,
-      version: 'wc/v1'
+      version: 'wc/v1',
+      agent: agent
     });
 
     chai.expect(api.version).to.equal('wc/v1');
     chai.expect(api.isSsl).to.be.false;
     chai.expect(api.verifySsl).to.be.true;
     chai.expect(api.encoding).to.equal('utf8');
+    chai.expect(api.agent).to.equal(agent);
   });
 });
 
@@ -35,7 +41,8 @@ describe('#Requests', function() {
     consumerKey: 'ck_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
     consumerSecret: 'cs_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
     wpAPI: true,
-    version: 'wc/v1'
+    version: 'wc/v1',
+    agent: httpsAgent
   });
 
   it('should return full API url', function() {
@@ -54,6 +61,7 @@ describe('#Requests', function() {
       wpAPI: true,
       wpAPIPrefix: 'wp-rest',
       version: 'wc/v1',
+      agent: httpsAgent
     });
 
     var endpoint = 'products';
