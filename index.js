@@ -212,7 +212,7 @@ WooCommerceAPI.prototype._request = function(method, endpoint, data, isWP, callb
  *
  * @return {Object}
  */
-WooCommerceAPI.prototype.get = function(endpoint, isWP, callback) {
+WooCommerceAPI.prototype.get = function(endpoint, isWP=false, callback) {
   return this._request('GET', endpoint, null, isWP, callback);
 };
 
@@ -225,7 +225,7 @@ WooCommerceAPI.prototype.get = function(endpoint, isWP, callback) {
  *
  * @return {Object}
  */
-WooCommerceAPI.prototype.post = function(endpoint, data, isWP, callback) {
+WooCommerceAPI.prototype.post = function(endpoint, data, isWP=false, callback) {
   return this._request('POST', endpoint, data, isWP, callback);
 };
 
@@ -238,7 +238,7 @@ WooCommerceAPI.prototype.post = function(endpoint, data, isWP, callback) {
  *
  * @return {Object}
  */
-WooCommerceAPI.prototype.put = function(endpoint, data, isWP, callback) {
+WooCommerceAPI.prototype.put = function(endpoint, data, isWP=false, callback) {
   return this._request('PUT', endpoint, data, isWP, callback);
 };
 
@@ -250,7 +250,7 @@ WooCommerceAPI.prototype.put = function(endpoint, data, isWP, callback) {
  *
  * @return {Object}
  */
-WooCommerceAPI.prototype.delete = function(endpoint, isWP, callback) {
+WooCommerceAPI.prototype.delete = function(endpoint, isWP=false, callback) {
   return this._request('DELETE', endpoint, null, isWP, callback);
 };
 
@@ -262,7 +262,7 @@ WooCommerceAPI.prototype.delete = function(endpoint, isWP, callback) {
  *
  * @return {Object}
  */
-WooCommerceAPI.prototype.options = function(endpoint, isWP, callback) {
+WooCommerceAPI.prototype.options = function(endpoint, isWP=false, callback) {
   return this._request('OPTIONS', endpoint, null, isWP, callback);
 };
 
