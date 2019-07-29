@@ -22,17 +22,16 @@
   "dependencies": {
     "bluebird": "3.5.5",
     "create-hmac": "1.1.7",
-    "npm-check-updates": "3.1.20",
     "oauth-1.0a": "2.2.6",
     "request": "2.88.0"
   },
   "devDependencies": {
-    "chai": "4.2.0",
-    "istanbul": "0.4.5",
+    "chai": "^3.5.0",
+    "istanbul": "^0.4.5",
     "jscs": "3.0.7",
     "jshint": "2.10.2",
-    "mocha": "6.2.0",
-    "nock": "10.0.6"
+    "mocha": "^3.1.0",
+    "nock": "^8.0.0"
   },
   "repository": {
     "type": "git",
