@@ -1,6 +1,8 @@
 # WooCommerce API - Node.js Client
 
-A Node.js wrapper for the WooCommerce REST API. Easily interact with the WooCommerce REST API using this library.
+A Node.js client for the WooCommerce REST API. Easily interact with the WooCommerce REST API using this library.
+
+**- 2019-07-29: This client is obsolete and will no longer receive updates, a new JavaScript library is available under the name of [`@woocommerce/woocommerce-rest-api`](https://github.com/woocommerce/woocommerce-rest-api-js-lib).**
 
 [![build status](https://secure.travis-ci.org/woocommerce/wc-api-node.svg)](http://travis-ci.org/woocommerce/wc-api-node)
 [![dependency status](https://david-dm.org/woocommerce/wc-api-node.svg)](https://david-dm.org/woocommerce/wc-api-node)
@@ -50,7 +52,7 @@ var WooCommerce = new WooCommerceAPI({
 
 ### Options
 
-|       Option      |    Type   | Required |                                               Description                                                |
+| Option            | Type      | Required | Description                                                                                              |
 |-------------------|-----------|----------|----------------------------------------------------------------------------------------------------------|
 | `url`             | `String`  | yes      | Your Store URL, example: http://woo.dev/                                                                 |
 | `consumerKey`     | `String`  | yes      | Your API consumer key                                                                                    |
@@ -63,10 +65,11 @@ var WooCommerce = new WooCommerceAPI({
 | `queryStringAuth` | `Bool`    | no       | When `true` and using under HTTPS force Basic Authentication as query string, default is `false`         |
 | `port`            | `string`  | no       | Provide support for URLs with ports, eg: `8080`                                                          |
 | `timeout`         | `Integer` | no       | Define the request timeout                                                                               |
+| `agent`           | `Agent`   | no       | User agent instance.                                                                                     |
 
 ## Methods
 
-|   Params   |    Type    |                         Description                          |
+| Params     | Type       | Description                                                  |
 |------------|------------|--------------------------------------------------------------|
 | `endpoint` | `String`   | WooCommerce API endpoint, example: `customers` or `order/12` |
 | `data`     | `Object`   | JS object, will be converted to JSON                         |
@@ -109,6 +112,7 @@ WooCommerce.getAsync('products').then(function(result) {
 
 ## Release History
 
+- 2019-07-29 - v1.5.0 - Updated dependencies, and adds support for `agent`.
 - 2016-12-14 - v1.4.2 - Fixed WordPress 4.7 compatibility.
 - 2016-09-28 - v1.4.1 - Updated dependencies and updated/fixed oAuth1.0a.
 - 2016-06-30 - v1.4.0 - Added `wpAPIPrefix` option to allow custom WP REST API Url prefix and support for promified methods.
